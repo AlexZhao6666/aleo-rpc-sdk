@@ -1,2 +1,2 @@
-# aleo-api-sdk
-aleo api sdk
+# aleo-rpc-sdk
+aleo rpc sdk
