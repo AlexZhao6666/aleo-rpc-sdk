@@ -62,11 +62,11 @@ impl NodeClient {
             .await.unwrap()
     }
 
-    pub async fn query_beacons(&self) -> IndexSet<Address<Testnet3>>{
-        reqwest::get(format!("{}/beacons",self.get_base_url())).await.unwrap()
-            .json::<IndexSet<Address<Testnet3>>>()
-            .await.unwrap()
-    }
+    // pub async fn query_beacons(&self) -> IndexSet<Address<Testnet3>>{
+    //     reqwest::get(format!("{}/beacons",self.get_base_url())).await.unwrap()
+    //         .json::<IndexSet<Address<Testnet3>>>()
+    //         .await.unwrap()
+    // }
 
     pub async fn query_peers_count(&self) -> usize{
         reqwest::get(format!("{}/peers/count",self.get_base_url())).await.unwrap()
