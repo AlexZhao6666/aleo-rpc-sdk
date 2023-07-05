@@ -31,9 +31,9 @@ impl ProgramClient {
     //         .await.unwrap()
     // }
 
-    pub async fn query_mapping_value(&self,program_id:String,mapping_name:String,mapping_key:String) -> Value<Testnet3>{
+    pub async fn query_mapping_value(&self,program_id:String,mapping_name:String,mapping_key:String) -> Option<Value<Testnet3>>{
         reqwest::get(format!("{}/program/{}/mapping/{}/{}",self.get_base_url(),program_id,mapping_name,mapping_key)).await.unwrap()
-            .json::<Value<Testnet3>>()
+            .json::<Option<Value<Testnet3>>>()
             .await.unwrap()
     }
 }

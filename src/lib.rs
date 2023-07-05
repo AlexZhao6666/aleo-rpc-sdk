@@ -9,6 +9,7 @@ pub fn add(left: usize, right: usize) -> usize {
 mod tests {
     use indexmap::IndexMap;
     use snarkvm::prelude::ConfirmedTransaction;
+    use snarkvm::prelude::helpers::rocksdb::DeploymentMap::Program;
     use snarkvm::prelude::Instruction::AssertEq;
     use snarkvm_console_network::Testnet3;
     use super::*;
@@ -39,7 +40,18 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn test_node() {
+    async fn test_program() {
+        let task = tokio::task::spawn(async {
+            let program_client = ProgramClient::new("http://localhost:3030/testnet3".to_string());
+            let result1 = program_client.query_program_by_id("double_color_ball.aleo".to_string()).await;
+            println!("111111:{}",result1);
+
+            let result2 = program_client.query_mapping_value("double_color_ball.aleo".to_string(),"currentPrizePoolMap".to_string(),"1u8".to_string()).await;
+            println!("222222:{}",result2);
+            (result1.to_string(),result2.to_string())
+
+        });
+        let (result1,result2) = task.await.expect("fail to test");
     }
 
 
